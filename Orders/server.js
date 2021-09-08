@@ -1,5 +1,4 @@
 const orders = require('./data.json') || {};
-const PORT = process.env.PORT || 8080;
 
 const express = require('express');
 const app = express();
@@ -37,6 +36,4 @@ app.post('/', (req, res, next) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+exports.Orders = app;
