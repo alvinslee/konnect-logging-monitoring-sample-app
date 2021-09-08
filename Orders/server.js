@@ -8,14 +8,18 @@ const { v4: uuid } = require('uuid');
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
+  console.log('GET /');
   res.send(orders);
 });
 
 app.get('/:id', (req, res, next) => {
+  console.log('GET /:id');
   const order = orders[req.params['id']];
   if (order) {
+    console.log(`Order with id ${req.params['id']} found.`);
     res.status(200).send(order);
   } else {
+    console.log(`Order with id ${req.params['id']} NOT FOUND.`);
     res.status(404).send('Order not found.');
   }
 });
@@ -32,6 +36,7 @@ app.post('/', (req, res, next) => {
       productId: String(req.body['productId'])
     };
     orders[order.id] = order;
+    console.log(`Created Order with id ${order.id}.`);
     res.status(201).send(order);
   }
 });

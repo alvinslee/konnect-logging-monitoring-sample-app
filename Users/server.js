@@ -8,14 +8,18 @@ const { v4: uuid } = require('uuid');
 app.use(express.json());
 
 app.get('/', (req, res, next) => {
+  console.log('GET /');
   res.send(users);
 });
 
 app.get('/:id', (req, res, next) => {
+  console.log('GET /:id');
   const user = users[req.params['id']];
   if (user) {
+    console.log(`User with id ${req.params['id']} found.`);
     res.status(200).send(user);
   } else {
+    console.log(`User with id ${req.params['id']} NOT FOUND.`);
     res.status(404).send('User not found.');
   }
 });
@@ -29,6 +33,7 @@ app.post('/', (req, res, next) => {
       name: String(req.body['name'])
     };
     users[user.id] = user;
+    console.log(`Created User with id ${user.id}.`);
     res.status(201).send(user);
   }
 });
